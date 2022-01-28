@@ -4,9 +4,11 @@ import requests
 from bs4 import BeautifulSoup
 import random
 
-response = requests.get(
-    url="https://en.wikipedia.org/wiki/web_craping",
-)
+def scrapeWikiArticle(url):
+    response = requests.get(
+        url=url,
+    )
+
 soup = BeautifulSoup(response.content, 'html.parser')
 
 title = soup.find(id="firstHeading")
@@ -26,4 +28,6 @@ for link in allLinks:
     linkToScrape = link
     break
 
-print(linkToScrape)
+scrapeWikiArticle("https://en.wikipedia.org" + linkToScrape['href'])
+
+scrapeWikiArticle("https://en.wikipedia.org/wiki/web_scraping")
