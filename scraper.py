@@ -9,25 +9,25 @@ def scrapeWikiArticle(url):
         url=url,
     )
 
-soup = BeautifulSoup(response.content, 'html.parser')
+    soup = BeautifulSoup(response.content, 'html.parser')
 
-title = soup.find(id="firstHeading")
-print(title.content)
+    title = soup.find(id="firstHeading")
+    print(title.content)
 
-# Get all the links
-allLinks = soup.find(id="bodyContent").find_all("a")
-random.shuffle(allLinks)
-linkToScrape = 0
+    # Get all the links
+    allLinks = soup.find(id="bodyContent").find_all("a")
+    random.shuffle(allLinks)
+    linkToScrape = 0
 
-for link in allLinks:
-    # We are only interested in other wiki articles 
-    if link['href'].find("/wiki/") == -1:
-        continue
+    for link in allLinks:
+        # We are only interested in other wiki articles 
+        if link['href'].find("/wiki/") == -1:
+            continue
 
-    # Use this link to scrape
-    linkToScrape = link
-    break
+        # Use this link to scrape
+        linkToScrape = link
+        break
 
-scrapeWikiArticle("https://en.wikipedia.org" + linkToScrape['href'])
+    scrapeWikiArticle("https://en.wikipedia.org" + linkToScrape['href'])
 
-scrapeWikiArticle("https://en.wikipedia.org/wiki/web_scraping")
+    scrapeWikiArticle("https://en.wikipedia.org/wiki/web_scraping")
